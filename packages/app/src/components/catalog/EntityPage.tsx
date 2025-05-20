@@ -58,13 +58,18 @@ import {
   isKubernetesAvailable,
 } from '@backstage/plugin-kubernetes';
 
+import {
+  EntityGithubActionsContent,
+  isGithubActionsAvailable,
+} from '@backstage-community/plugin-github-actions';
+    
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
       <ReportIssue />
     </TechDocsAddons>
   </EntityTechdocsContent>
-);
+); 
 
 const cicdContent = (
   // This is an example of how you can implement your company's logic in entity page.
@@ -144,7 +149,7 @@ const overviewContent = (
 );
 
 const serviceEntityPage = (
-  <EntityLayout>
+    <EntityLayout>
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
     </EntityLayout.Route>
@@ -159,6 +164,10 @@ const serviceEntityPage = (
       if={isKubernetesAvailable}
     >
       <EntityKubernetesContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/github-actions" title="GitHub Actions" if={isGithubActionsAvailable}>
+      <EntityGithubActionsContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/api" title="API">
